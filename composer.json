@@ -1,0 +1,26 @@
+{
+    "name": "simpla/framework",
+    "description": "a simple core for simpla.",
+    "keywords": ["framework", "simpla"],
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Ken",
+            "email": "y80x86ol@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "phpFastCache/phpFastCache": "*"
+    },
+    "autoload": {
+        "files": [
+            "simpla/framework/src/Illuminate/Bootstrap.php",
+            "simpla/framework/src/Illuminate/Route.php"
+        ],
+        "psr-4": {
+            "Illuminate\\": "simpla/framework/src/Illuminate/"
+        }
+    }
+}
