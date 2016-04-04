@@ -19,11 +19,11 @@
     },
     "autoload": {
         "files": [
-            "y80x86ol/simpla-framework/src/Illuminate/Bootstrap.php",
-            "y80x86ol/simpla-framework/src/Illuminate/Route.php"
+            "src/Illuminate/Bootstrap.php",
+            "src/Illuminate/Route.php"
         ],
         "psr-4": {
-            "Illuminate\\": "y80x86ol/simpla-framework/src/Illuminate/"
+            "Illuminate\\": "src/Illuminate/"
         }
     }
 }
