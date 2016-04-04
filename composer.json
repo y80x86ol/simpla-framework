@@ -1,7 +1,10 @@
 {
-    "name": "y80x86ol/simplaFramework",
-    "description": "a simple core for simpla.",
-    "keywords": ["framework", "simpla"],
+    "name": "y80x86ol/simpla-framework",
+    "description": "a simple framework core for simpla framework.",
+    "keywords": [
+        "framework",
+        "simpla"
+    ],
     "license": "MIT",
     "version": "1.0.0",
     "authors": [
@@ -16,11 +19,11 @@
     },
     "autoload": {
         "files": [
-            "y80x86ol/simplaFramework/src/Illuminate/Bootstrap.php",
-            "y80x86ol/simplaFramework/src/Illuminate/Route.php"
+            "y80x86ol/simpla-framework/src/Illuminate/Bootstrap.php",
+            "y80x86ol/simpla-framework/src/Illuminate/Route.php"
         ],
         "psr-4": {
-            "Illuminate\\": "y80x86ol/simplaFramework/src/Illuminate/"
+            "Illuminate\\": "y80x86ol/simpla-framework/src/Illuminate/"
         }
     }
 }
