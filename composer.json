@@ -1,5 +1,5 @@
 {
-    "name": "simpla/framework",
+    "name": "y80x86ol/simplaFramework",
     "description": "a simple core for simpla.",
     "keywords": ["framework", "simpla"],
     "license": "MIT",
@@ -16,11 +16,11 @@
     },
     "autoload": {
         "files": [
-            "simpla/framework/src/Illuminate/Bootstrap.php",
-            "simpla/framework/src/Illuminate/Route.php"
+            "y80x86ol/simplaFramework/src/Illuminate/Bootstrap.php",
+            "y80x86ol/simplaFramework/src/Illuminate/Route.php"
         ],
         "psr-4": {
-            "Illuminate\\": "simpla/framework/src/Illuminate/"
+            "Illuminate\\": "y80x86ol/simplaFramework/src/Illuminate/"
         }
     }
 }
