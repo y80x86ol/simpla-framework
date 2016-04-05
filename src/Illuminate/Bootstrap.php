@@ -19,6 +19,9 @@ defined("SIMPLA_PATH") or define("SIMPLA_PATH", dirname(__FILE__));
 //引入帮助类
 require_once(dirname(__FILE__) . '/Libs/Helper.php');
 
+//引入系统支持类
+require_once(dirname(__FILE__) . '/Support/Handle.php');
+
 //引入其他类
 
 class Bootstrap {

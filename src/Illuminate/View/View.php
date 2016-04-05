@@ -19,6 +19,10 @@ class View {
 	 * @param array $data 视图参数
 	 */
 	public static function make($viewName, $data = array()) {
+                //验证参数
+                if(!is_array($data)) {
+                    error('视图参数必须为数组');
+                }
 		$viewPath = self::getViewPath($viewName);
 
 		if (file_exists($viewPath)) {
@@ -29,7 +33,7 @@ class View {
                         //引入模板文件
 			require $viewPath;
 		} else {
-			die('不存在的模板文件');
+			error('不存在的模板文件');
 		}
 	}
 
