@@ -22,6 +22,11 @@ class View {
 		$viewPath = self::getViewPath($viewName);
 
 		if (file_exists($viewPath)) {
+                        //输出参数
+                        foreach($data as $key => $value) {
+                            $$key = $value;
+                        }
+                        //引入模板文件
 			require $viewPath;
 		} else {
 			die('不存在的模板文件');
