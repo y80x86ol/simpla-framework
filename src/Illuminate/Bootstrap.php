@@ -37,7 +37,7 @@ class Bootstrap {
 		if (!empty($appConfig['theme'])) {
 			defined("APP_NAME") or define("APP_NAME", $appConfig['name']);
 		} else {
-			defined("APP_THEME") or define("APP_THEME", 'Simpla');
+			defined("APP_NAME") or define("APP_NAME", 'Simpla');
 		}
 
 		//是否开启错误提示
