@@ -26,6 +26,9 @@ require_once(dirname(__FILE__) . '/Support/Handle.php');
 
 class Bootstrap {
 	public static function run() {
+                //初始化session
+                session_start();
+                
 		//初始化配置文件
 		Config::getInstance();
 
