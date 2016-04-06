@@ -39,6 +39,17 @@ if (!function_exists('theme')) {
 }
 
 /**
+ * 应用域名地址
+ */
+if (!function_exists('base_url')) {
+
+    function base_url() {
+        return '/' . trim(BASE_URL, '/');
+    }
+
+}
+
+/**
  * 上传的文件地址
  */
 if (!function_exists('storage')) {
