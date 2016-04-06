@@ -35,16 +35,18 @@ class Bootstrap {
 		$appConfig = Config::get('app');
 		//初始化主题
 		if (!empty($appConfig['theme'])) {
-			defined("APP_THEME") or define("APP_THEME", PUBLIC_PATH . '/' . $appConfig['theme']);
+			defined("APP_THEME") or define("APP_THEME", $appConfig['public'] . '/' . $appConfig['theme']);
 		} else {
-			defined("APP_THEME") or define("APP_THEME", PUBLIC_PATH);
+			defined("APP_THEME") or define("APP_THEME", $appConfig['public']);
 		}
 		//初始化应用名字
-		if (!empty($appConfig['theme'])) {
+		if (!empty($appConfig['name'])) {
 			defined("APP_NAME") or define("APP_NAME", $appConfig['name']);
 		} else {
 			defined("APP_NAME") or define("APP_NAME", 'Simpla');
 		}
+                //初始化上传文件
+                defined("APP_STORAGE") or define("APP_STORAGE", $appConfig['storage']);
 
 		//是否开启错误提示
 		if ($appConfig['debug'] == 1) {
