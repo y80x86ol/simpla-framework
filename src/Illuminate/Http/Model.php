@@ -33,19 +33,20 @@ class Model {
      * @return \mysql
      */
     public function where($array) {
-        $where = '';
+        $where = "";
         foreach ($array as $key => $value) {
-            if ($where == '') {
+            $value = Database::$sqlServer->real_escape_string($value);
+            if ($where == "") {
                 if (is_array($value)) {
-                    $where .= '';
+                    $where .= "";
                 } else {
-                    $where .= 'where ' . $key . '=\'' . $value . '\'';
+                    $where .= "where " . $key . "='" . $value . "'";
                 }
             } else {
                 if (is_array($value)) {
-                    $where .= '';
+                    $where .= "";
                 } else {
-                    $where .= 'and ' . $key . '=' . $value;
+                    $where .= "and " . $key . "=" . $value;
                 }
             }
         }
@@ -172,7 +173,7 @@ class Model {
             $sql .= $this->_instance['group'];
         }
 
-        return mysql_real_escape_string($sql);
+        return $sql;
     }
 
     /**
