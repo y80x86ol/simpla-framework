@@ -75,4 +75,21 @@ class Database {
         return $result;
     }
 
+    /**
+     * 进行数据库变量安全处理
+     * @param type $string
+     */
+    public static function real_escape_string($string) {
+        $dbConfig = Config::get('database');
+        //获取数据库连接类型
+        $dbType = isset($dbConfig['default']) ? $dbConfig['default'] : 'mysql';
+
+        switch ($dbType) {
+            case 'mysql':
+                $newString = self::$sqlServer->real_escape_string($string);
+                break;
+        }
+        return $newString;
+    }
+
 }

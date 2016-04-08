@@ -1,6 +1,6 @@
 <?php
 /**
- * »º´æÀà
+ * ç¼“å­˜ç±»
  * User: ken
  * Date: 2016/3/28 0028
  * Time: 2016 6:27
@@ -16,14 +16,14 @@ class Cache {
 	private static $cache;
 
 	/**
-	 * ³õÊ¼»¯
+	 * åˆå§‹åŒ–
 	 */
 	public function __construct() {
 		self::$cache = ICache::$cache;
 	}
 
 	/**
-	 * ¾²Ì¬³õÊ¼»¯
+	 * é™æ€åˆå§‹åŒ–
 	 *
 	 * @return Cache
 	 */
@@ -35,20 +35,20 @@ class Cache {
 	}
 
 	/**
-	 * ÉèÖÃ»º´æ
+	 * è®¾ç½®ç¼“å­˜
 	 *
-	 * @param string $name ¼üÃû
-	 * @param string $value ¼üÖµ
-	 * @param int $time »º´æÊ±¼ä
+	 * @param string $name é”®å
+	 * @param string $value é”®å€¼
+	 * @param int $time ç¼“å­˜æ—¶é—´
 	 */
 	public static function set($name, $value, $time = 0) {
 		self::$cache->set($name, $value, $time);
 	}
 
 	/**
-	 * »ñÈ¡»º´æ
+	 * è·å–ç¼“å­˜
 	 *
-	 * @param string $name ¼üÃû
+	 * @param string $name é”®å
 	 * @return string
 	 */
 	public static function get($name) {
@@ -56,8 +56,8 @@ class Cache {
 	}
 
 	/**
-	 * »ñÈ¡»º´æĞÅÏ¢
-	 * @param string $name ¼üÃû
+	 * è·å–ç¼“å­˜ä¿¡æ¯
+	 * @param string $name é”®å
 	 * @return null|object
 	 */
 	public static function getInfo($name) {
@@ -65,44 +65,44 @@ class Cache {
 	}
 
 	/**
-	 * É¾³ı»º´æ
-	 * @param $name        ¼üÃû
+	 * åˆ é™¤ç¼“å­˜
+	 * @param $name        é”®å
 	 */
 	public static function delete($name) {
 		self::$cache->delete($name);
 	}
 
 	/**
-	 * Çå³ıËùÓĞ»º´æ
+	 * æ¸…é™¤æ‰€æœ‰ç¼“å­˜
 	 */
 	public static function flush() {
 		self::$cache->flush();
 	}
 
 	/**
-	 * Ôö¼ÓÖ¸¶¨$num
+	 * å¢åŠ æŒ‡å®š$num
 	 *
-	 * @param string $name ¼üÃû
-	 * @param int $num Ôö¼ÓµÄÖµ
+	 * @param string $name é”®å
+	 * @param int $num å¢åŠ çš„å€¼
 	 */
 	public static function increment($name, $num = 1) {
 		self::$cache->increment($name, $num);
 	}
 
 	/**
-	 * ¼õÉÙÖ¸¶¨$num
+	 * å‡å°‘æŒ‡å®š$num
 	 *
-	 * @param string $name ¼üÃû
-	 * @param int $num ¼õÉÙµÄÖµ
+	 * @param string $name é”®å
+	 * @param int $num å‡å°‘çš„å€¼
 	 */
 	public static function decrement($name, $num = 1) {
 		self::$cache->decrement($name, $num);
 	}
 
 	/**
-	 * ¼ì²é»º´æÊÇ·ñ´æÔÚ
+	 * æ£€æŸ¥ç¼“å­˜æ˜¯å¦å­˜åœ¨
 	 *
-	 * @param string $name ¼üÃû
+	 * @param string $name é”®å
 	 * @return bool
 	 */
 	public static function isExisting($name) {
@@ -111,12 +111,12 @@ class Cache {
 
 	/**
 	 * =====================================================
-	 * ÅúÁ¿²Ù×÷
+	 * æ‰¹é‡æ“ä½œ
 	 * =====================================================
 	 */
 	/**
-	 * ÅúÁ¿»ñÈ¡»º´æ
-	 * example£º$data = array("key1", "key2", "key3");
+	 * æ‰¹é‡è·å–ç¼“å­˜
+	 * exampleï¼š$data = array("key1", "key2", "key3");
 	 *
 	 * @param array $data
 	 * @return array
@@ -126,8 +126,8 @@ class Cache {
 	}
 
 	/**
-	 * ÅúÁ¿ÉèÖÃ»º´æ
-	 * example£º
+	 * æ‰¹é‡è®¾ç½®ç¼“å­˜
+	 * exampleï¼š
 	 * array("key1","value1", 300),
 	 * array("key2","value2", 600),
 	 * array("key3","value3", 1800),

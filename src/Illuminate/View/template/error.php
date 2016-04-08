@@ -1,1 +1,34 @@
-发生了一个错误：<?php echo $msg;?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Simpla Error</title>
+        <style>
+            body {
+                width: 1000px;
+                margin: 0 auto;
+                font-weight: 100;
+                font-family: 'Lato';
+            }
+
+            .container {
+                margin-top: 50px;
+            }
+            .content{
+                padding: 10px;
+                border: 2px solid #eee;
+                border-radius: 10px;
+            }
+            .title {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="content">
+                <div class="title">错误:<?php echo $msg; ?></div>
+            </div>
+        </div>
+    </body>
+</html>

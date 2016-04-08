@@ -35,7 +35,7 @@ class Model {
     public function where($array) {
         $where = "";
         foreach ($array as $key => $value) {
-            $value = Database::$sqlServer->real_escape_string($value);
+            $value = Database::real_escape_string($value);
             if ($where == "") {
                 if (is_array($value)) {
                     $where .= "";
@@ -61,6 +61,7 @@ class Model {
      * @return obj
      */
     public function limit($limit) {
+        $limit = Database::real_escape_string($limit);
         $this->_instance['limit'] = ' limit ' . $limit;
         return $this;
     }
@@ -72,6 +73,7 @@ class Model {
      * @return obj
      */
     public function table($table) {
+        $table = Database::real_escape_string($table);
         $this->_instance['table'] = $table . ' ';
         return $this;
     }
@@ -83,6 +85,7 @@ class Model {
      * @return obj
      */
     public function fields($fileds) {
+        $fileds = Database::real_escape_string($fileds);
         $this->_instance['fields'] = 'select ' . $fileds . ' ';
         return $this;
     }
@@ -94,6 +97,7 @@ class Model {
      * @return obj
      */
     public function orderBy($order) {
+        $order = Database::real_escape_string($order);
         $this->_instance['order'] = 'order by ' . $order . ' ';
         return $this;
     }
@@ -105,6 +109,7 @@ class Model {
      * @return obj
      */
     public function groupBy($group) {
+        $group = Database::real_escape_string($group);
         $this->_instance['group'] = 'group by ' . $group . ' ';
         return $this;
     }
@@ -197,6 +202,8 @@ class Model {
         $data_key = '(';
         $data_value = '';
         foreach ($data as $key => $value) {
+            $key = Database::real_escape_string($key);
+            $value = Database::real_escape_string($value);
             $data_key .= $key . ',';
             $data_value .= $value . ',';
         }
