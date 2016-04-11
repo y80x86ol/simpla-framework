@@ -14,7 +14,8 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "phpFastCache/phpFastCache": "*"
+        "phpFastCache/phpFastCache": "*",
+        "league/plates": "3.*"
     },
     "autoload": {
         "files": [
