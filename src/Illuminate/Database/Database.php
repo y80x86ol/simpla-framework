@@ -7,6 +7,7 @@
 namespace Illuminate\Database;
 
 use Illuminate\Config\Config;
+use PDO;
 
 class Database {
 
@@ -17,19 +18,35 @@ class Database {
      * 初始化应用
      */
     public function __construct() {
+//        $dbConfig = Config::get('database');
+//        //获取数据库连接类型
+//        $dbType = isset($dbConfig['default']) ? $dbConfig['default'] : 'mysql';
+//        //获取数据库对应类型的配置信息
+//        $sqlConfig = $dbConfig['connections'][$dbType];
+        //实例化数据库，建立连接
+//        $classType = ucfirst($dbType);
+//        $sqlNamespaces = '\Illuminate\Database\\' . $classType;
+//        $sqlObj = new $sqlNamespaces();
+        //$sqlServer = $sqlObj->connect($sqlConfig);
+        $sqlServer = $this->connect();
+
+        self::$sqlServer = $sqlServer;
+    }
+
+    /**
+     * 进行PDO连接
+     * @return \Illuminate\Database\PDO
+     */
+    public function connect() {
         $dbConfig = Config::get('database');
         //获取数据库连接类型
         $dbType = isset($dbConfig['default']) ? $dbConfig['default'] : 'mysql';
         //获取数据库对应类型的配置信息
         $sqlConfig = $dbConfig['connections'][$dbType];
 
-        //实例化数据库，建立连接
-        $classType = ucfirst($dbType);
-        $sqlNamespaces = '\Illuminate\Database\\' . $classType;
-        $sqlObj = new $sqlNamespaces();
-        $sqlServer = $sqlObj->connect($sqlConfig);
-
-        self::$sqlServer = $sqlServer;
+        //进行PDO数据库连接
+        $sqlServer = new PDO('mysql:host=' . $sqlConfig['host'] . ';dbname=' . $sqlConfig['database'], $sqlConfig['username'], $sqlConfig['password']);
+        return $sqlServer;
     }
 
     public function __clone() {
@@ -56,9 +73,8 @@ class Database {
      */
     public static function getQueryAll($sql) {
         print_r('<p>' . $sql . '</p>');
-        $sqlResult = self::$sqlServer->query($sql);
-        $result = $sqlResult->fetch_all(MYSQLI_ASSOC);
-        return $result;
+        $result = self::$sqlServer->query($sql, PDO::FETCH_ASSOC);
+        return $result->fetchAll();
     }
 
     /**
@@ -69,10 +85,9 @@ class Database {
      */
     public static function getQueryOne($sql) {
         print_r('<p>' . $sql . '</p>');
-        $sqlResult = self::$sqlServer->query($sql);
 
-        $result = $sqlResult->fetch_assoc();
-        return $result;
+        $result = self::$sqlServer->query($sql, PDO::FETCH_ASSOC);
+        return $result->fetch();
     }
 
     /**
@@ -84,11 +99,8 @@ class Database {
         //获取数据库连接类型
         $dbType = isset($dbConfig['default']) ? $dbConfig['default'] : 'mysql';
 
-        switch ($dbType) {
-            case 'mysql':
-                $newString = self::$sqlServer->real_escape_string($string);
-                break;
-        }
+        //Todo:进行字符串过滤处理
+        $newString = $string;
         return $newString;
     }
 
