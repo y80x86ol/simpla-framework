@@ -10,46 +10,30 @@
 namespace Illuminate\View;
 
 use Illuminate\Config\Config;
+use League\Plates\Engine;
 
 class View {
-	/**
-	 * 输出视图文件
-	 *
-	 * @param string $viewName 视图文件
-	 * @param array $data 视图参数
-	 */
-	public static function make($viewName, $data = array()) {
-                //验证参数
-                if(!is_array($data)) {
-                    error('视图参数必须为数组');
-                }
-		$viewPath = self::getViewPath($viewName);
 
-		if (file_exists($viewPath)) {
-                        //输出参数
-                        foreach($data as $key => $value) {
-                            $$key = $value;
-                        }
-                        //引入模板文件
-			require $viewPath;
-		} else {
-			error('不存在的模板文件');
-		}
-	}
+    /**
+     * 获取plates模板引擎
+     * @return Engine
+     */
+    public static function getTemplate() {
+        return new Engine(self::getViewPath());
+    }
 
-	/**
-	 * 获取视图文件路径
-	 *
-	 * @param string $viewName 视图文件名字
-	 * @return string 视图路径
-	 */
-	public static function getViewPath($viewName) {
-		$appConfig = Config::get('app');
-		if (empty($appConfig['theme'])) {
-			$viewPath = APP_PATH . '/views/' . $viewName . '.php';
-		} else {
-			$viewPath = APP_PATH . '/views/' . $appConfig['theme'] . '/' . $viewName . '.php';
-		}
-		return $viewPath;
-	}
+    /**
+     * 获取视图所在文件夹
+     * @return string
+     */
+    public static function getViewPath() {
+        $appConfig = Config::get('app');
+        if (empty($appConfig['theme'])) {
+            $viewPath = APP_PATH . '/views';
+        } else {
+            $viewPath = APP_PATH . '/views/' . $appConfig['theme'];
+        }
+        return $viewPath;
+    }
+
 }

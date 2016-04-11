@@ -6,8 +6,15 @@
 
 namespace Illuminate\Http;
 
+use Illuminate\View\View;
+
 class Controller {
-	public function __construct() {
-		//ToDo
-	}
+
+    public $template;
+
+    public function __construct() {
+        //初始化template
+        $this->template = View::getTemplate();
+    }
+
 }
