@@ -40,7 +40,7 @@ class Database {
     }
 
     public function __clone() {
-        die('该类不允许被克隆');
+        die('该类不允许被克隆'); 
     }
 
     /**
