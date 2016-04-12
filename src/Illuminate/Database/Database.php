@@ -18,16 +18,6 @@ class Database {
      * 初始化应用
      */
     public function __construct() {
-//        $dbConfig = Config::get('database');
-//        //获取数据库连接类型
-//        $dbType = isset($dbConfig['default']) ? $dbConfig['default'] : 'mysql';
-//        //获取数据库对应类型的配置信息
-//        $sqlConfig = $dbConfig['connections'][$dbType];
-        //实例化数据库，建立连接
-//        $classType = ucfirst($dbType);
-//        $sqlNamespaces = '\Illuminate\Database\\' . $classType;
-//        $sqlObj = new $sqlNamespaces();
-        //$sqlServer = $sqlObj->connect($sqlConfig);
         $sqlServer = $this->connect();
 
         self::$sqlServer = $sqlServer;
