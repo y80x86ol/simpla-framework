@@ -16,7 +16,7 @@
         "php": ">=5.5.9",
         "phpFastCache/phpFastCache": "*",
         "league/plates": "3.*",
-        "vrana/notorm": "*"
+        "vrana/notorm": "dev-master"
     },
     "autoload": {
         "files": [
