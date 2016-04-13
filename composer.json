@@ -26,11 +26,5 @@
         "psr-4": {
             "Illuminate\\": "src/Illuminate/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
-    },
-    "minimum-stability": "dev"
+    }
 }
