@@ -15,7 +15,9 @@
     "require": {
         "php": ">=5.5.9",
         "phpFastCache/phpFastCache": "*",
-        "league/plates": "3.*",
+        "league/plates": "3.*"
+    },
+    "require-dev": {
         "vrana/notorm": "dev-master"
     },
     "autoload": {
