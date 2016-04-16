@@ -16,10 +16,7 @@
         "php": ">=5.5.9",
         "phpFastCache/phpFastCache": "*",
         "league/plates": "3.*",
-        "vrana/notorm": "dev-master"
-    },
-    "require-dev": {
-        
+        "php-activerecord/php-activerecord": "1.1.2"
     },
     "autoload": {
         "files": [
@@ -30,5 +27,5 @@
             "Illuminate\\": "src/Illuminate/"
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
 }
