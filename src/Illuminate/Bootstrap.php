@@ -12,6 +12,7 @@ use Illuminate\Cache\ICache;
 use Illuminate\Database\Database;
 use Illuminate\Route;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\Model;
 
 //基础定义
 defined("SIMPLA_PATH") or define("SIMPLA_PATH", dirname(__FILE__));
@@ -67,7 +68,7 @@ class Bootstrap {
         }
 
         //初始化数据库
-        Database::getInstance();
+        Model::getInstance();
 
         //初始化缓存
         ICache::getInstance();

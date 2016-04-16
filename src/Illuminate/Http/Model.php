@@ -6,235 +6,48 @@
 
 namespace Illuminate\Http;
 
-use Illuminate\Database\Database;
+use ActiveRecord\Config;
+use Illuminate\Config\Config as simplaConfig;
 
 class Model {
 
-    private $_instance;
-    protected $table;
+    private static $_instance;
 
     public function __construct() {
-        //ToDo
+        $this->connect();
     }
 
     /**
-     * 数据库查询
+     * 静态初始化应用
      *
-     * @param string $sql
+     * @return obj 缓存对象
      */
-    public function getQuery($sql) {
-        return Database::getQuery($sql);
-    }
-
-    /**
-     * where条件组装
-     *
-     * @param array $array
-     * @return \mysql
-     */
-    public function where($array) {
-        $where = "";
-        foreach ($array as $key => $value) {
-            $value = Database::real_escape_string($value);
-            if ($where == "") {
-                if (is_array($value)) {
-                    $where .= "";
-                } else {
-                    $where .= "where " . $key . "='" . $value . "'";
-                }
-            } else {
-                if (is_array($value)) {
-                    $where .= "";
-                } else {
-                    $where .= "and " . $key . "=" . $value;
-                }
-            }
+    public static function getInstance() {
+        if (!(self::$_instance instanceof self)) {
+            self::$_instance = new self();
         }
-        $this->_instance['where'] = $where;
-        return $this;
+        return self::$_instance;
     }
 
-    /**
-     * 查询条件限制
-     *
-     * @param string $limit
-     * @return obj
-     */
-    public function limit($limit) {
-        $limit = Database::real_escape_string($limit);
-        $this->_instance['limit'] = ' limit ' . $limit;
-        return $this;
+    private function connect() {
+        Config::initialize(function($cfg) {
+            $modelDirectory = APP_PATH . '/Models';
+            $configInfo = $this->getConnectType();
+            $cfg->set_model_directory($modelDirectory);
+            $cfg->set_connections(array(
+                'development' => $configInfo));
+        });
     }
 
-    /**
-     * 数据库名字
-     *
-     * @param string $table
-     * @return obj
-     */
-    public function table($table) {
-        $table = Database::real_escape_string($table);
-        $this->_instance['table'] = $table . ' ';
-        return $this;
-    }
+    private function getConnectType() {
+        $dbConfig = simplaConfig::get('database');
+        //获取数据库连接类型
+        $dbType = isset($dbConfig['default']) ? $dbConfig['default'] : 'mysql';
+        //获取数据库对应类型的配置信息
+        $sqlConfig = $dbConfig['connections'][$dbType];
 
-    /**
-     * 需要查询的字段
-     *
-     * @param string $fileds
-     * @return obj
-     */
-    public function fields($fileds) {
-        $fileds = Database::real_escape_string($fileds);
-        $this->_instance['fields'] = 'select ' . $fileds . ' ';
-        return $this;
-    }
-
-    /**
-     * 排序方式
-     *
-     * @param string $order
-     * @return obj
-     */
-    public function orderBy($order) {
-        $order = Database::real_escape_string($order);
-        $this->_instance['order'] = 'order by ' . $order . ' ';
-        return $this;
-    }
-
-    /**
-     * 分组条件
-     *
-     * @param string $group
-     * @return obj
-     */
-    public function groupBy($group) {
-        $group = Database::real_escape_string($group);
-        $this->_instance['group'] = 'group by ' . $group . ' ';
-        return $this;
-    }
-
-    /**
-     * 查询所有结果
-     *
-     * @return mixed
-     */
-    public function select() {
-        $sql = $this->getSql();
-
-        return Database::getQueryAll($sql);
-    }
-
-    /**
-     * 查询单条记录
-     *
-     * @return mixed
-     */
-    public function findOne() {
-        $sql = $this->getSql();
-
-        return Database::getQueryOne($sql);
-    }
-
-    /**
-     * 查询总数
-     *
-     * @return array
-     */
-    public function count() {
-        $sql = $this->getSql();
-        return Database::getQueryOne($sql);
-    }
-
-    /**
-     * 获取组装后的sql语句
-     *
-     * @return string
-     */
-    private function getSql() {
-        $sql = '';
-
-        if (isset($this->_instance['fields'])) {
-            $sql .= $this->_instance['fields'];
-        } else {
-            $sql .= 'select * ';
-        }
-        if (isset($this->_instance['table'])) {
-            $sql .= ' from ' . $this->_instance['table'];
-        } else {
-            die('不存在的表名');
-        }
-
-        if (isset($this->_instance['where'])) {
-            $sql .= $this->_instance['where'];
-        }
-        if (isset($this->_instance['limit'])) {
-            $sql .= $this->_instance['limit'];
-        }
-        if (isset($this->_instance['order'])) {
-            $sql .= $this->_instance['order'];
-        }
-        if (isset($this->_instance['group'])) {
-            $sql .= $this->_instance['group'];
-        }
-
-        return $sql;
-    }
-
-    /**
-     * --------------------------------------------------------------
-     * 插入操作
-     * --------------------------------------------------------------
-     */
-
-    /**
-     * 插入数据
-     *
-     * @param $data
-     */
-    public function insert($data) {
-        $sql = 'insert into ';
-        if (isset($this->_instance['table'])) {
-            $sql .= $this->_instance['table'];
-        } else {
-            die('不存在的数据表');
-        }
-        $data_key = '(';
-        $data_value = '';
-        foreach ($data as $key => $value) {
-            $key = Database::real_escape_string($key);
-            $value = Database::real_escape_string($value);
-            $data_key .= $key . ',';
-            $data_value .= $value . ',';
-        }
-
-        $data_key = rtrim($data_key, ',') . ')';
-        $data_value = rtrim($data_value, ',') . ')';
-
-        $sql .= $data_key . ' values ' . $data_value;
-
-        $this->getQuery($sql);
-    }
-
-    /**
-     * --------------------------------------------------------------
-     * 其他
-     * --------------------------------------------------------------
-     */
-
-    /**
-     * 获取查询的表名字
-     *
-     * @return mixed
-     */
-    private function getTable() {
-        if (isset($this->_instance['table'])) {
-            return $this->_instance['table'];
-        } elseif (!empty($this->table)) {
-            return $this->table;
-        } else {
-            die('不存在的表名');
-        }
+        $configInfo = 'mysql://' . $sqlConfig['username'] . ':' . $sqlConfig['password'] . '@' . $sqlConfig['host'] . '/' . $sqlConfig['database'];
+        return $configInfo;
     }
 
 }
