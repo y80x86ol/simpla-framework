@@ -7,6 +7,7 @@
 namespace Illuminate;
 
 use Illuminate\Http\Request;
+use Illuminate\Filesystem\Filesystem;
 
 class Route {
 
@@ -29,14 +30,27 @@ class Route {
         $systemControllerPath = SIMPLA_PATH . '/Http/' . $systemControllerFile;
         $systemNamespaces = '\Illuminate\Http\\' . $systemControllerName;
 
-        //验证控制器是否存在
+        //验证主文件夹下控制器是否存在
         if (file_exists($controllerPath) == TRUE) {
             self::runController($op, $namespaces);
         } elseif (file_exists($systemControllerPath) == TRUE && in_array($systemControllerName, array('HandlerController'))) {
             self::runController($op, $systemNamespaces);
-        } else {
-            redirect_404();
         }
+
+        //验证主文件夹下面的子文件夹是否存在该控制器方法
+        $dirList = Filesystem::getDirList(APP_PATH . '/controllers/');
+        if ($dirList) {
+            foreach ($dirList as $item) {
+                $controllerPath = APP_PATH . '/controllers/' . $item . '/' . $controllerFile;
+                if (file_exists($controllerPath) == TRUE) {
+                    $namespaces = '\App\Controllers\\' . $item . '\\' . $controllerName;
+                    self::runController($op, $namespaces);
+                }
+            }
+        }
+
+        //没有找到路由，跳转404错误
+        redirect_404();
     }
 
     /**
@@ -56,6 +70,7 @@ class Route {
 
         //验证通过，执行方法
         $controller->$op();
+        exit;
     }
 
 }
