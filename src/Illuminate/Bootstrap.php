@@ -7,9 +7,8 @@
 namespace Illuminate;
 
 use Illuminate\Config\Config;
-use Illuminate\Cache\Cache;
 use Illuminate\Cache\ICache;
-use Illuminate\Database\Database;
+use Illuminate\Cache\Cache;
 use Illuminate\Route;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Model;

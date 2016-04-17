@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 响应类.
  * User: ken
@@ -8,16 +9,16 @@
 
 namespace Illuminate\Http;
 
-
 class Response {
 
-	/**
-	 * 输出json格式
-	 *
-	 * @param $data
-	 * @return json
-	 */
-	public static function json($data) {
-		return json_encode($data);
-	}
+    /**
+     * 输出json格式
+     *
+     * @param $data
+     * @return json
+     */
+    public static function json($data) {
+        return json_encode($data);
+    }
+
 }

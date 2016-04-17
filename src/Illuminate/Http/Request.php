@@ -124,10 +124,21 @@ class Request {
      *
      * @return mixed
      */
-    public static function paramFilter($param = array()) {
-        foreach ($param as $key => $value) {
-            $param[$key] = String::urlSafetyFilter($value);
+    public static function paramFilter($param) {
+        if (empty($param)) {
+            $param = '';
         }
+
+        if (is_array($param)) {
+            foreach ($param as $key => $value) {
+                $param[$key] = String::urlSafetyFilter($value);
+            }
+        }
+
+        if (is_string($param)) {
+            $param = String::urlSafetyFilter($param);
+        }
+
         return $param;
     }
 
