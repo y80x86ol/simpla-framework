@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=5.4",
         "phpFastCache/phpFastCache": "*",
         "league/plates": "3.*",
         "php-activerecord/php-activerecord": "1.1.2"
