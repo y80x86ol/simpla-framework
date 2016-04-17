@@ -1,10 +1,7 @@
 <?php
 
 /**
- * 缓存接口类.
- * User: ken
- * Date: 2016/3/28 0028
- * Time: 下午 9:53
+ * 缓存接口类
  */
 
 namespace Illuminate\Cache;

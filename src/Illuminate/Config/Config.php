@@ -3,9 +3,6 @@
 /**
  * 配置文件类
  * 单列模式，减少请求次数
- * User: Ken
- * Date: 2016/3/25 0025
- * Time: 下午 10:07
  */
 
 namespace Illuminate\Config;

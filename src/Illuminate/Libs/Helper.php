@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: ken
- * Date: 2016/3/25 0025
- * Time: 下午 11:10
+ * 帮助类
  */
 /**
  * 重定向

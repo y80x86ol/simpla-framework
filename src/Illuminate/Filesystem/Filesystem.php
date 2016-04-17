@@ -2,9 +2,6 @@
 
 /**
  * 文件处理类.
- * User: Administrator
- * Date: 2016/4/2 0002
- * Time: 下午 10:12
  */
 
 namespace Illuminate\Filesystem;

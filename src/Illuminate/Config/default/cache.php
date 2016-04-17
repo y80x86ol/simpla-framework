@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2016/3/28 0028
- * Time: ���� 8:32
+ * 数据库配置文件
  */
 return array(
     'fileSystem' => 'file', //默认为file文件缓存，目前支持file、memcache、memcached、redis、apc五种缓存

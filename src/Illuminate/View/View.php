@@ -1,10 +1,7 @@
 <?php
 
 /**
- * 视图.
- * User: ken<695093513@qq.com>
- * Date: 2016/3/26 0026
- * Time: 下午 9:30
+ * 视图类.
  */
 
 namespace Illuminate\View;

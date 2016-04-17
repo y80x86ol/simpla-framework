@@ -2,9 +2,6 @@
 
 /**
  * 请求类.
- * User: ken
- * Date: 2016/4/3 0003
- * Time: 下午 8:42
  */
 
 namespace Illuminate\Http;

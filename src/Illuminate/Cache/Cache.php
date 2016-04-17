@@ -2,9 +2,6 @@
 
 /**
  * 缓存类
- * User: ken
- * Date: 2016/3/28 0028
- * Time: 2016 6:27
  */
 
 namespace Illuminate\Cache;
