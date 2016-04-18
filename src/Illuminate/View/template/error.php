@@ -8,9 +8,8 @@
                 width: 1000px;
                 margin: 0 auto;
                 font-weight: 100;
-                font-family: 'Lato';
+                font-family: 'Microsoft YaHei';
             }
-
             .container {
                 margin-top: 50px;
             }
@@ -27,7 +26,7 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">错误:<?php echo $msg; ?></div>
+                <div class="title"><?php echo $msg; ?></div>
             </div>
         </div>
     </body>
