@@ -16,7 +16,9 @@
         "php": ">=5.4",
         "phpFastCache/phpFastCache": "*",
         "league/plates": "3.*",
-        "php-activerecord/php-activerecord": "1.1.2"
+        "php-activerecord/php-activerecord": "1.1.2",
+        "monolog/monolog": "^1.19",
+        "filp/whoops": "2.*"
     },
     "autoload": {
         "files": [
