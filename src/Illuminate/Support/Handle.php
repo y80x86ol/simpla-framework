@@ -17,6 +17,17 @@ if (!function_exists('error')) {
 }
 
 /**
+ * 404错误展示类
+ */
+if (!function_exists('error_404')) {
+
+    function error_404() {
+        error("404 not found");
+    }
+
+}
+
+/**
  * 应用名字
  */
 if (!function_exists('appName')) {

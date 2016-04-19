@@ -159,15 +159,25 @@ class Request {
 
         //处理请求URL
         $requestUrlArr = explode('/', $requestUrlArr[0]);
+
         if (count($requestUrlArr) == 0) {
-            redirect_404();
+            error_404();
+        }
+        if (count($requestUrlArr) == 1) {//dev.example.com/aaa
+            $act = !empty($requestUrlArr[0]) ? $requestUrlArr[0] : 'index';
+            $op = 'actionIndex';
+            $namespace = '';
+        } elseif (count($requestUrlArr) == 2) {//dev.example.com/aaa/bbb
+            $act = $requestUrlArr[0];
+            $op = 'action' . ucfirst($requestUrlArr[1]);
+            $namespace = '';
+        } elseif (count($requestUrlArr) >= 3) {//dev.example.com/aaa/bbb/ccc/ddd
+            $op = 'action' . array_pop($requestUrlArr); //第一个弹出的为op
+            $act = array_pop($requestUrlArr); //第二个弹出的为act
+            $namespace = implode('/', $requestUrlArr); //剩余的就是命名文件夹
         }
 
-        //将第一个参数视为控制器，第二个参数视为方法，后面的参数视为参数
-        $act = !empty($requestUrlArr[0]) ? $requestUrlArr[0] : 'index';
-        $op = isset($requestUrlArr[1]) ? 'action' . ucfirst($requestUrlArr[1]) : 'actionIndex';
-
-        $data = array($act, $op);
+        $data = array($act, $op, $namespace);
 
         return $data;
     }
