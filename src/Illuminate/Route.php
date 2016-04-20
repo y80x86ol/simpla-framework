@@ -7,6 +7,7 @@
 namespace Illuminate;
 
 use Illuminate\Http\Request;
+use Illuminate\Log\Log;
 
 class Route {
 
@@ -55,6 +56,10 @@ class Route {
 
         //验证通过，执行方法
         $controller->$op();
+
+        //记录路由日志
+        $msg = 'method：' . filter_input(INPUT_SERVER, 'REQUEST_METHOD') . '，url：' . filter_input(INPUT_SERVER, 'REQUEST_URI') . '，Http Status：' . filter_input(INPUT_SERVER, 'REDIRECT_STATUS');
+        Log::info($msg);
         exit;
     }
 

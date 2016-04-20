@@ -16,6 +16,17 @@ use Illuminate\Http\Model;
 //基础定义
 defined("SIMPLA_PATH") or define("SIMPLA_PATH", dirname(__FILE__));
 
+//app应用路径
+defined('APP_PATH') or define('APP_PATH', BASE_PATH . '/app');
+//配置文件路径
+defined('CONFIG_PATH') or define('CONFIG_PATH', BASE_PATH . '/config');
+//文件存储路径
+defined('STORAGE_PATH') or define('STORAGE_PATH', BASE_PATH . '/storage');
+//缓存地址路径
+defined('CACHE_PATH') or define('CACHE_PATH', STORAGE_PATH . '/cache');
+//日志地址路径
+defined('LOG_PATH') or define('LOG_PATH', STORAGE_PATH . '/log');
+
 //引入帮助类
 require_once(dirname(__FILE__) . '/Libs/Helper.php');
 
@@ -53,11 +64,6 @@ class Bootstrap {
 
         //初始化应用URL域名
         defined("BASE_URL") or define("BASE_URL", $appConfig['url']);
-
-        //初始化文件存储
-        $storage = $appConfig['storage'] ? $appConfig['storage'] : '';
-        Filesystem::mkdir($storage);
-        defined("APP_STORAGE") or define("APP_STORAGE", $storage);
 
         //是否开启错误提示
         if ($appConfig['debug'] == 1) {
