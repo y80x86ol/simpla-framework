@@ -22,8 +22,7 @@
     },
     "autoload": {
         "files": [
-            "src/Illuminate/Bootstrap.php",
-            "src/Illuminate/Route.php"
+            "src/Illuminate/Bootstrap.php"
         ],
         "psr-4": {
             "Illuminate\\": "src/Illuminate/"
