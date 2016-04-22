@@ -8,6 +8,8 @@ namespace Illuminate\View;
 
 use Illuminate\Config\Config;
 use League\Plates\Engine;
+use Illuminate\Route\RouteHandle;
+use Illuminate\Filesystem\Filesystem;
 
 class View {
 
@@ -31,12 +33,16 @@ class View {
             } else {
                 $viewPath = APP_PATH . '/views/' . $appConfig['theme'];
             }
-            return $viewPath;
         } elseif ($type == 'module') {
-            $module = 'admin';
+            $module = RouteHandle::getModuleName();
             $viewPath = APP_PATH . '/Modules/' . $module . '/views/';
-            return $viewPath;
         }
+
+        //进行view地址进行校验，不存在则生成，防止plates报错
+        if (!file_exists($viewPath)) {
+            Filesystem::mkdir($viewPath);
+        }
+        return $viewPath;
     }
 
 }

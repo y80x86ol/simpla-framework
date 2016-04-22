@@ -8,7 +8,7 @@ namespace Illuminate\Route;
 
 use Illuminate\Str\String;
 
-class RouteHandler {
+class RouteHandle {
 
     /**
      * 处理路由，获取控制器和执行方法
@@ -20,10 +20,6 @@ class RouteHandler {
         $requestUrlArr = self::getRouteString();
 
         //处理请求URL
-
-        if (count($requestUrlArr) == 0) {
-            error_404();
-        }
         if (count($requestUrlArr) == 1) {//dev.example.com/aaa
             $data = array(array(
                     'act' => !empty($requestUrlArr[0]) ? $requestUrlArr[0] : 'index',
@@ -68,9 +64,6 @@ class RouteHandler {
         $requestUrlArr = self::getRouteString();
 
         //处理请求URL
-        if (count($requestUrlArr) == 0) {
-            error_404();
-        }
         if (count($requestUrlArr) == 1) {//dev.example.com/aaa
             $data = array(array(
                     'module' => $requestUrlArr[0],
@@ -147,7 +140,20 @@ class RouteHandler {
         //处理请求URL
         $requestUrlArr = explode('/', $requestUrlArr[0]);
 
+        if (count($requestUrlArr) == 0) {
+            error_404();
+        }
         return $requestUrlArr;
+    }
+
+    /**
+     * 获取模块名字
+     */
+    public static function getModuleName() {
+        //获取请求URL
+        $requestUrlArr = self::getRouteString();
+        $module = array_shift($requestUrlArr);
+        return $module;
     }
 
 }

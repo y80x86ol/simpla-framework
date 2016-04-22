@@ -6,7 +6,7 @@
 
 namespace Illuminate\Route;
 
-use Illuminate\Route\RouteHandler;
+use Illuminate\Route\RouteHandle;
 use Illuminate\Log\Log;
 
 class Route {
@@ -16,7 +16,7 @@ class Route {
      */
     public static function check() {
         //1、判断路由是否为模块路由
-        $route = RouteHandler::getModuleRoute();
+        $route = RouteHandle::getModuleRoute();
 
         foreach ($route as $item) {
             $module = $item['module'];
@@ -37,7 +37,7 @@ class Route {
         }
 
         //2、获取控制器和方法
-        $route = RouteHandler::getRoute();
+        $route = RouteHandle::getRoute();
         foreach ($route as $item) {
             $act = $item['act'];
             $op = $item['op'];
