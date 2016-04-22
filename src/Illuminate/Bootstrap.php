@@ -9,7 +9,7 @@ namespace Illuminate;
 use Illuminate\Config\Config;
 use Illuminate\Cache\ICache;
 use Illuminate\Cache\Cache;
-use Illuminate\Route;
+use Illuminate\Route\Route;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Model;
 

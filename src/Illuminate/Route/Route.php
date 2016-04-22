@@ -4,9 +4,9 @@
  * 路由
  */
 
-namespace Illuminate;
+namespace Illuminate\Route;
 
-use Illuminate\Http\Request;
+use Illuminate\Route\RouteHandler;
 use Illuminate\Log\Log;
 
 class Route {
@@ -15,8 +15,29 @@ class Route {
      * 路由检查
      */
     public static function check() {
-        //获取控制器和方法
-        $route = Request::getRoute();
+        //1、判断路由是否为模块路由
+        $route = RouteHandler::getModuleRoute();
+
+        foreach ($route as $item) {
+            $module = $item['module'];
+            $act = $item['act'];
+            $op = $item['op'];
+            $namespaces = $item['namespace'];
+
+            //获取控制器路径
+            $controllerName = ucfirst($act) . 'Controller';
+            $controllerFile = $namespaces ? $namespaces . '/' . $controllerName . '.php' : $controllerName . '.php';
+            $controllerPath = APP_PATH . '/modules/' . $module . '/controllers/' . $controllerFile;
+            $controllerNamespace = $namespaces ? '\App\Modules\\' . $module . '\Controllers\\' . $namespaces . '\\' : '\App\Modules\\' . $module . '\Controllers\\';
+
+            //验证controller控制器文件和类是否存在
+            if (file_exists($controllerPath) == TRUE && class_exists($controllerNamespace . $controllerName)) {
+                self::runController($controllerName, $op, $controllerNamespace);
+            }
+        }
+
+        //2、获取控制器和方法
+        $route = RouteHandler::getRoute();
         foreach ($route as $item) {
             $act = $item['act'];
             $op = $item['op'];
