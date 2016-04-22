@@ -6,6 +6,8 @@
 
 namespace Illuminate\Route;
 
+use Illuminate\Str\String;
+
 class RouteHandler {
 
     /**
