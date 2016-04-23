@@ -73,6 +73,7 @@ class Config {
     /**
      * 获取单个配置
      *
+     * Config::get('app')
      * 可以采用Config::get('app.domain');的方式获取子配置
      * 
      * @param string $name 配置名字
