@@ -25,7 +25,8 @@ if (!function_exists('error_404')) {
 
     function error_404() {
 
-        $msg = 'method：' . filter_input(INPUT_SERVER, 'REQUEST_METHOD') . '，url：' . filter_input(INPUT_SERVER, 'REQUEST_URI') . '，Http Status：' . filter_input(INPUT_SERVER, 'REDIRECT_STATUS');
+        //404错误进行日志记录
+        $msg = '404 not found，method：' . filter_input(INPUT_SERVER, 'REQUEST_METHOD') . '，url：' . filter_input(INPUT_SERVER, 'REQUEST_URI') . '，Http Status：' . filter_input(INPUT_SERVER, 'REDIRECT_STATUS');
         Log::error($msg);
 
         error("404 not found");

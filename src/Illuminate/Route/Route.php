@@ -37,8 +37,8 @@ class Route {
         }
 
         //2、获取控制器和方法
-        $route = RouteHandle::getRoute();
-        foreach ($route as $item) {
+        $routeModule = RouteHandle::getRoute();
+        foreach ($routeModule as $item) {
             $act = $item['act'];
             $op = $item['op'];
             $namespaces = $item['namespace'];

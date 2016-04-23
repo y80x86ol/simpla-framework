@@ -28,7 +28,7 @@ defined('CACHE_PATH') or define('CACHE_PATH', STORAGE_PATH . '/cache');
 defined('LOG_PATH') or define('LOG_PATH', STORAGE_PATH . '/log');
 
 //引入帮助类
-require_once(dirname(__FILE__) . '/Libs/Helper.php');
+require_once(dirname(__FILE__) . '/Support/Helper.php');
 
 //引入系统支持类
 require_once(dirname(__FILE__) . '/Support/Handle.php');
