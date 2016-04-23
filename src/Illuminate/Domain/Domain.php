@@ -1,10 +1,12 @@
 <?php
 
 /*
- * 域名操作类
+ * 域名类
  */
 
 namespace Illuminate\Domain;
+
+use Illuminate\Config\Config;
 
 class Domain {
 
@@ -18,6 +20,19 @@ class Domain {
         $domain = array_shift($serverArr);
 
         return $domain;
+    }
+
+    /**
+     * 验证二级域名是否设置
+     * @return boolean|string
+     */
+    public static function checkSecondDomain() {
+        $domain = self::getSecondDomain();
+        $domainConfig = Config::get('app.domain');
+        if (isset($domainConfig[$domain])) {
+            return $domainConfig[$domain];
+        }
+        return false;
     }
 
 }

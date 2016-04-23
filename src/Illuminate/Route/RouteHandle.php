@@ -7,19 +7,18 @@
 namespace Illuminate\Route;
 
 use Illuminate\Str\String;
-use Illuminate\Config\Config;
 use Illuminate\Domain\Domain;
 
 class RouteHandle {
 
     /**
-     * 处理路由，获取控制器和执行方法
+     * 处理普通路由，获取命名空间、控制器和执行方法
      *
      * @return array
      */
     public static function getRoute() {
         //获取请求URL
-        $requestUrlArr = self::getRouteString();
+        $requestUrlArr = self::getRouteArray();
 
         //处理请求URL
         if (count($requestUrlArr) == 1) {//dev.example.com/aaa
@@ -57,13 +56,13 @@ class RouteHandle {
     }
 
     /**
-     * 处理路由，获取控制器和执行方法
+     * 处理module模块路由，获取命名空间、控制器和执行方法
      *
      * @return array
      */
     public static function getModuleRoute() {
         //获取请求URL
-        $requestUrlArr = self::getRouteString();
+        $requestUrlArr = self::getRouteArray();
 
         //处理请求URL
         if (count($requestUrlArr) == 1) {//dev.example.com/aaa
@@ -126,7 +125,11 @@ class RouteHandle {
         return $data;
     }
 
-    private static function getRouteString() {
+    /**
+     * 获取路由数组
+     * @return type
+     */
+    private static function getRouteArray() {
         //获取请求URL
         $requestUrl = ltrim(rtrim($_SERVER['REQUEST_URI'], '/'), '/');
 
@@ -156,7 +159,7 @@ class RouteHandle {
      */
     public static function getModuleName() {
         //获取请求URL
-        $requestUrlArr = self::getRouteString();
+        $requestUrlArr = self::getRouteArray();
         $module = array_shift($requestUrlArr);
         return $module;
     }
@@ -170,16 +173,12 @@ class RouteHandle {
      * @return array   增加了二级域名标示的路由数组
      */
     private static function secondDomainFilter($requestUrlArr) {
-        $domain = Domain::getSecondDomain();
-        $domainConfig = Config::get('app.domain');
-
-        //判断是否是二级域名访问
-        if (isset($domainConfig[$domain])) {
-            $domainPointer = $domainConfig[$domain];
+        $domain = Domain::checkSecondDomain();
+        if ($domain) {
             if (empty($requestUrlArr[0])) {
-                $requestUrlArr[0] = $domainPointer;
+                $requestUrlArr[0] = $domain;
             } else {
-                array_unshift($requestUrlArr, $domainPointer);
+                array_unshift($requestUrlArr, $domain);
             }
         }
         return $requestUrlArr;

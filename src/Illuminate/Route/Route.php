@@ -60,7 +60,7 @@ class Route {
     }
 
     /**
-     * 进行方法请求
+     * 进行路由方法请求
      *
      * @param string $op 执行方法
      * @param string $namespaces 命名空间
