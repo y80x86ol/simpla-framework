@@ -7,6 +7,8 @@
 namespace Illuminate\Route;
 
 use Illuminate\Str\String;
+use Illuminate\Config\Config;
+use Illuminate\Domain\Domain;
 
 class RouteHandle {
 
@@ -143,6 +145,9 @@ class RouteHandle {
         if (count($requestUrlArr) == 0) {
             error_404();
         }
+
+        $requestUrlArr = self::secondDomainFilter($requestUrlArr);
+
         return $requestUrlArr;
     }
 
@@ -154,6 +159,30 @@ class RouteHandle {
         $requestUrlArr = self::getRouteString();
         $module = array_shift($requestUrlArr);
         return $module;
+    }
+
+    /**
+     * 二级域名路由追加处理
+     * 
+     * 如果存在二级域名，则对路由头部插入二级域名标示。
+     * 
+     * @param array $requestUrlArr 路由数组
+     * @return array   增加了二级域名标示的路由数组
+     */
+    private static function secondDomainFilter($requestUrlArr) {
+        $domain = Domain::getSecondDomain();
+        $domainConfig = Config::get('app.domain');
+
+        //判断是否是二级域名访问
+        if (isset($domainConfig[$domain])) {
+            $domainPointer = $domainConfig[$domain];
+            if (empty($requestUrlArr[0])) {
+                $requestUrlArr[0] = $domainPointer;
+            } else {
+                array_unshift($requestUrlArr, $domainPointer);
+            }
+        }
+        return $requestUrlArr;
     }
 
 }

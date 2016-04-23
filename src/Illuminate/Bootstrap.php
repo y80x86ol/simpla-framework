@@ -82,5 +82,4 @@ class Bootstrap {
         //路由处理
         Route::check();
     }
-
 }

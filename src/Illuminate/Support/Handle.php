@@ -4,6 +4,8 @@
  * 系统帮助支持类
  */
 
+use Illuminate\Log\Log;
+
 /**
  * 错误展示类
  */
@@ -22,6 +24,10 @@ if (!function_exists('error')) {
 if (!function_exists('error_404')) {
 
     function error_404() {
+
+        $msg = 'method：' . filter_input(INPUT_SERVER, 'REQUEST_METHOD') . '，url：' . filter_input(INPUT_SERVER, 'REQUEST_URI') . '，Http Status：' . filter_input(INPUT_SERVER, 'REDIRECT_STATUS');
+        Log::error($msg);
+
         error("404 not found");
     }
 

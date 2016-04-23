@@ -73,14 +73,25 @@ class Config {
     /**
      * 获取单个配置
      *
+     * 可以采用Config::get('app.domain');的方式获取子配置
+     * 
      * @param string $name 配置名字
      * @return bool|array
      */
     public static function get($name) {
-        $config = self::$config[$name];
-        if ($config) {
-            return $config;
+        $nameArry = explode('.', $name);
+        if (count($nameArry) == 1) {
+            $config = self::$config[$name];
+            if ($config) {
+                return $config;
+            }
+        } elseif (count($nameArry) > 1) {
+            $config = self::$config[$nameArry[0]];
+            if ($config && $config[$nameArry[1]]) {
+                return $config[$nameArry[1]];
+            }
         }
+
         return false;
     }
 
