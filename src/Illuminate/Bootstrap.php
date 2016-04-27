@@ -12,6 +12,8 @@ use Illuminate\Cache\Cache;
 use Illuminate\Route\Route;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Model;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Handler\JsonResponseHandler;
 
 //基础定义
 defined("SIMPLA_PATH") or define("SIMPLA_PATH", dirname(__FILE__));
@@ -79,7 +81,21 @@ class Bootstrap {
         ICache::getInstance();
         Cache::getInstance();
 
+        //初始化whoops
+        $run = new \Whoops\Run;
+        $handler = new PrettyPageHandler;
+        // 设置错误页面的标题
+        $handler->setPageTitle("Whoops! 出现了一个错误.");
+        $run->pushHandler($handler);
+        //设置ajax错误提示.
+        if (\Whoops\Util\Misc::isAjaxRequest()) {
+            $run->pushHandler(new JsonResponseHandler);
+        }
+        // 注册handler
+        $run->register();
+
         //路由处理
         Route::check();
     }
+
 }
